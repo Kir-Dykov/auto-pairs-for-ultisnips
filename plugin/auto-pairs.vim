@@ -442,6 +442,11 @@ func! AutoPairsSpace()
   return "\<SPACE>"
 endf
 
+func! UltiSnipsExpand()
+call UltiSnips#ExpandSnippet()
+return ""
+endf
+
 func! AutoPairsMap(key)
   " | is special key which separate map command from text
   let key = a:key
@@ -450,7 +455,7 @@ func! AutoPairsMap(key)
   end
   let escaped_key = substitute(key, "'", "''", 'g')
   " use expr will cause search() doesn't work
-  execute 'inoremap <buffer> <silent> '.key." <C-R>=AutoPairsInsert('".escaped_key."')<CR>"
+  execute 'inoremap <buffer> <silent> '.key." <C-R>=AutoPairsInsert('".escaped_key."')<CR><C-R>=UltiSnipsExpand()<CR>"
 endf
 
 func! AutoPairsToggle()
